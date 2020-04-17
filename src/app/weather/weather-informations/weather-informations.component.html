@@ -1,0 +1,6 @@
+sunrise : {{weatherApiService.sunrise | date:'EEEE'}}
+
+sunrise : {{weatherApiService.sunrise | date:'shortTime'}}
+sunset : {{weatherApiService.sunset | date:'shortTime'}}
+Wind speed: {{weatherApiService.windSpeed}} m/s
+<!-- Wind angle: {{windAngle}} deg<img src="https://cdn.imgbin.com/16/8/23/imgbin-wind-direction-computer-icons-arrow-6Lkgkhue65Yirm9waWQbxGV3A.jpg" [ngStyle]="{'transform': 'rotate('+windAngle+'deg)'}"> -->

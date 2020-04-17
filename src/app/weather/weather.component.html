@@ -1,0 +1,46 @@
+<main>
+  <!-- <img class="weather-background" src="./assets/img/wallpaperbetter.jpg"> -->
+  <section id="weather-content">
+    <header>
+      <a href="https://thomas-bellavoine.com/">
+          <img src="assets/img/logo.png">
+      </a>
+    </header>
+    <figure>
+      <img *ngIf="weatherApiService.weatherIcon" src="http://openweathermap.org/img/wn/{{weatherApiService.weatherIcon}}@2x.png">
+    </figure>
+    <div id="weather">
+      <p class="temperature">{{weatherApiService.temperature | number:'1.0-0'}}<sup>°</sup></p>
+      <p class="description">{{weatherApiService.weatherDescription}}<span>Parapluie</span></p>
+    </div>
+    <footer>
+      <p>{{weatherApiService.date}}</p>
+      <p>{{weatherApiService.cityName}}</p>
+    </footer>
+  </section>
+  
+
+
+
+  <aside id="weather-tiles">
+    <div id="weather-form">
+      <form [formGroup]="cityForm" (ngSubmit)="onSubmit()">
+      <label>
+          City:
+          <input type="text" formControlName="name">
+        </label>
+        <button type="submit" [disabled]="!cityForm.valid">Submit</button>
+      </form>
+    </div>
+    <div id="weather-informations">
+      <app-weather-informations></app-weather-informations>
+    </div>
+    <div id="weather-chart">
+      <!-- <app-weather-chart *ngIf="hourly" [hours]="hourly"></app-weather-chart> -->
+    </div>
+    <div id="weather-days">
+      <app-weather-next-days *ngFor="let day of weatherApiService.daily | slice:2" [day]="day"></app-weather-next-days>
+    </div>
+  </aside>
+</main>
+

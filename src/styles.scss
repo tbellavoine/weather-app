@@ -2,9 +2,15 @@
 body{
     background:#202020;
     font-family: 'Roboto Condensed', sans-serif;
+    font-weight:300;
     color:#fff;
-
+    overflow:hidden;
+    margin:0;
     p{
         margin:0;
+    }
+    h3{
+        margin-top:0;
+        margin-bottom:50px;
     }
 }

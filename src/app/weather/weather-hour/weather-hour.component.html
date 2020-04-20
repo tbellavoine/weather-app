@@ -1,0 +1,5 @@
+<h4 *ngIf="previousDay !== date">{{date}}</h4>
+<p *ngIf="(index + 1) % 4 == 0">
+    <span>{{time}}</span>
+    <span><img src="http://openweathermap.org/img/wn/{{weatherIcon}}@2x.png">{{temperature | number:'1.0-0'}}°</span>
+</p>

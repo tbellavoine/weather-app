@@ -1,0 +1,17 @@
+p{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    margin:15px 0;
+    img{
+        margin-right: 5px;
+        width: 40px;
+    }
+    span{
+        display:flex;
+        align-items:center;
+    }
+}
+h4{
+    text-align:center;
+}

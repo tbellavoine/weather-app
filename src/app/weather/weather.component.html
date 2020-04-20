@@ -1,45 +1,71 @@
 <main>
-  <!-- <img class="weather-background" src="./assets/img/wallpaperbetter.jpg"> -->
+  <div class="weather-background">
+    <video *ngIf="weatherApiService.background" autoplay="true" muted="muted" loop #video>
+      <source src="assets/videos/{{weatherApiService.background}}" type="video/mp4">
+    </video>
+  </div>
   <section id="weather-content">
     <header>
       <a href="https://thomas-bellavoine.com/">
           <img src="assets/img/logo.png">
       </a>
+      <div class="video-actions">
+        <span>
+          <!-- //Sound -->
+          <svg id="Layer" *ngIf="isSound" (click)="muteVideo()" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><path d="m357.934 366.94c-5.834 0-11.682-2.114-16.3-6.391-9.726-9.005-10.31-24.19-1.304-33.916 17.843-19.269 27.67-44.354 27.67-70.633s-9.827-51.364-27.67-70.634c-9.006-9.726-8.422-24.911 1.304-33.916 9.726-9.007 24.91-8.421 33.916 1.303 26.084 28.17 40.45 64.838 40.45 103.247s-14.366 75.077-40.45 103.247c-4.73 5.107-11.164 7.693-17.616 7.693z"/><path d="m422.19 438.59c-6.154 0-12.306-2.352-16.994-7.053-9.36-9.385-9.339-24.581.046-33.94 37.891-37.788 58.758-88.075 58.758-141.597s-20.867-103.809-58.758-141.597c-9.385-9.359-9.406-24.556-.046-33.94 9.359-9.387 24.555-9.406 33.941-.047 46.987 46.859 72.863 109.216 72.863 175.584s-25.876 128.725-72.863 175.584c-4.684 4.671-10.816 7.006-16.947 7.006z"/><path d="m99 160h-55c-24.301 0-44 19.699-44 44v104c0 24.301 19.699 44 44 44h55c2.761 0 5-2.239 5-5v-182c0-2.761-2.239-5-5-5z"/><path d="m280 56h-24c-5.269 0-10.392 1.734-14.578 4.935l-103.459 79.116c-1.237.946-1.963 2.414-1.963 3.972v223.955c0 1.557.726 3.026 1.963 3.972l103.459 79.115c4.186 3.201 9.309 4.936 14.579 4.936h23.999c13.255 0 24-10.745 24-24v-352.001c0-13.255-10.745-24-24-24z"/></svg>
+          <svg id="Layer" *ngIf="!isSound" (click)="muteVideo()" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><path d="m457.941 256 47.029-47.029c9.372-9.373 9.372-24.568 0-33.941-9.373-9.373-24.568-9.373-33.941 0l-47.029 47.029-47.029-47.029c-9.373-9.373-24.568-9.373-33.941 0-9.372 9.373-9.372 24.568 0 33.941l47.029 47.029-47.029 47.029c-9.372 9.373-9.372 24.568 0 33.941 4.686 4.687 10.827 7.03 16.97 7.03s12.284-2.343 16.971-7.029l47.029-47.03 47.029 47.029c4.687 4.687 10.828 7.03 16.971 7.03s12.284-2.343 16.971-7.029c9.372-9.373 9.372-24.568 0-33.941z"/><path d="m99 160h-55c-24.301 0-44 19.699-44 44v104c0 24.301 19.699 44 44 44h55c2.761 0 5-2.239 5-5v-182c0-2.761-2.239-5-5-5z"/><path d="m280 56h-24c-5.269 0-10.392 1.734-14.578 4.935l-103.459 79.116c-1.237.946-1.963 2.414-1.963 3.972v223.955c0 1.557.726 3.026 1.963 3.972l103.459 79.115c4.186 3.201 9.309 4.936 14.579 4.936h23.999c13.255 0 24-10.745 24-24v-352.001c0-13.255-10.745-24-24-24z"/></svg>
+        </span>
+        <span>
+          <!-- //Play -->
+          <svg id="Layer_1" *ngIf="!isPlaying" (click)="playVideo()" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 494.148 494.148" style="enable-background:new 0 0 494.148 494.148;" xml:space="preserve"><path d="M405.284,201.188L130.804,13.28C118.128,4.596,105.356,0,94.74,0C74.216,0,61.52,16.472,61.52,44.044v406.124 c0,27.54,12.68,43.98,33.156,43.98c10.632,0,23.2-4.6,35.904-13.308l274.608-187.904c17.66-12.104,27.44-28.392,27.44-45.884 C432.632,229.572,422.964,213.288,405.284,201.188z"/></svg>
+          <svg id="Capa_1" *ngIf="isPlaying" (click)="pauseVideo()" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><path d="M181.333,0H74.667c-17.643,0-32,14.357-32,32v448c0,17.643,14.357,32,32,32h106.667c17.643,0,32-14.357,32-32V32 C213.333,14.357,198.976,0,181.333,0z"/><path d="M437.333,0H330.667c-17.643,0-32,14.357-32,32v448c0,17.643,14.357,32,32,32h106.667c17.643,0,32-14.357,32-32V32 C469.333,14.357,454.976,0,437.333,0z"/></svg>
+        </span>
+      </div>
     </header>
-    <figure>
-      <img *ngIf="weatherApiService.weatherIcon" src="http://openweathermap.org/img/wn/{{weatherApiService.weatherIcon}}@2x.png">
-    </figure>
+    
     <div id="weather">
       <p class="temperature">{{weatherApiService.temperature | number:'1.0-0'}}<sup>°</sup></p>
-      <p class="description">{{weatherApiService.weatherDescription}}<span>Parapluie</span></p>
+      <div class="description">
+        <figure>
+          <img *ngIf="weatherApiService.weatherIcon" src="http://openweathermap.org/img/wn/{{weatherApiService.weatherIcon}}@2x.png">
+        </figure>
+        <p class="description">{{weatherApiService.weatherDescription}}
+          <span>{{weatherApiService.advice}}</span>
+        </p>
+      </div>
+      
     </div>
     <footer>
       <p>{{weatherApiService.date}}</p>
       <p>{{weatherApiService.cityName}}</p>
     </footer>
   </section>
-  
-
-
-
-  <aside id="weather-tiles">
+  <div class="btn-aside" [ngClass]="{ 'open': isOpen}" (click)="openAside()">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.23 20.2"><title>arrow</title><g id="Calque_2" data-name="Calque 2"><g id="Layer_2" data-name="Layer 2"><path d="M.28,9.34l9-9a1.1,1.1,0,0,1,1.56,0,1.09,1.09,0,0,1,0,1.55L4.88,8a3.27,3.27,0,0,0-.82,2.12,3.38,3.38,0,0,0,.82,2.16l6.05,6.06a1.14,1.14,0,0,1-1.61,1.6l-9-9A1.82,1.82,0,0,1,0,10.08,1,1,0,0,1,.28,9.34Z" style="fill:#fff"/></g></g></svg>
+  </div>
+  <aside [ngClass]="{ 'open': isOpen}">
     <div id="weather-form">
       <form [formGroup]="cityForm" (ngSubmit)="onSubmit()">
       <label>
-          City:
-          <input type="text" formControlName="name">
+          <button type="submit" [disabled]="!cityForm.valid">
+            <svg id="Capa_1" enable-background="new 0 0 515.558 515.558" height="12px" viewBox="0 0 515.558 515.558" width="12px" xmlns="http://www.w3.org/2000/svg"><path d="m378.344 332.78c25.37-34.645 40.545-77.2 40.545-123.333 0-115.484-93.961-209.445-209.445-209.445s-209.444 93.961-209.444 209.445 93.961 209.445 209.445 209.445c46.133 0 88.692-15.177 123.337-40.547l137.212 137.212 45.564-45.564c0-.001-137.214-137.213-137.214-137.213zm-168.899 21.667c-79.958 0-145-65.042-145-145s65.042-145 145-145 145 65.042 145 145-65.043 145-145 145z"/></svg>
+          </button>
+          <input type="text" formControlName="name" placeholder="Chercher une ville">
         </label>
-        <button type="submit" [disabled]="!cityForm.valid">Submit</button>
+        <span class="error-message" *ngIf="weatherApiService.errorCityName !== ''">{{weatherApiService.errorCityName}}</span>
       </form>
     </div>
     <div id="weather-informations">
+      <h3>Informations</h3>
       <app-weather-informations></app-weather-informations>
     </div>
-    <div id="weather-chart">
-      <!-- <app-weather-chart *ngIf="hourly" [hours]="hourly"></app-weather-chart> -->
-    </div>
     <div id="weather-days">
-      <app-weather-next-days *ngFor="let day of weatherApiService.daily | slice:2" [day]="day"></app-weather-next-days>
+      <h3>Prochains jours</h3>
+      <app-weather-next-days *ngFor="let day of weatherApiService.daily | slice:1" [day]="day"></app-weather-next-days>
+    </div>
+    <div id="weather-chart">
+      <h3>Prochaines heures</h3>
+      <app-weather-hour *ngFor="let hour of weatherApiService.hourly; let i = index" [hour]="hour" [index]="i"></app-weather-hour>
     </div>
   </aside>
 </main>

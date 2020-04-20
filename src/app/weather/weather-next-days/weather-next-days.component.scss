@@ -1,0 +1,14 @@
+.weather-next-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:5px 0;
+    p{
+        display:flex;
+        align-items:center;
+        img{
+            margin-right:5px;
+            width:40px;
+        }
+    }
+}

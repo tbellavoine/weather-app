@@ -2,13 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { GoogleChartsModule } from 'angular-google-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WeatherComponent } from './weather/weather.component';
 import { WeatherNextDaysComponent } from './weather/weather-next-days/weather-next-days.component';
-import { WeatherChartComponent } from './weather/weather-chart/weather-chart.component';
+import { WeatherHourComponent } from './weather/weather-hour/weather-hour.component';
 import { WeatherInformationsComponent } from './weather/weather-informations/weather-informations.component';
 
 @NgModule({
@@ -16,7 +15,7 @@ import { WeatherInformationsComponent } from './weather/weather-informations/wea
     AppComponent,
     WeatherComponent,
     WeatherNextDaysComponent,
-    WeatherChartComponent,
+    WeatherHourComponent,
     WeatherInformationsComponent
   ],
   imports: [
@@ -24,8 +23,7 @@ import { WeatherInformationsComponent } from './weather/weather-informations/wea
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
-    GoogleChartsModule
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

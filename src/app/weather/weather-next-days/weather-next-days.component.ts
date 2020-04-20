@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class WeatherNextDaysComponent implements OnInit {
 
   @Input('day') day: any;
+  date:string;
   temperature:number;
   temperatureMin:number;
   temperatureMax:number;
@@ -21,6 +22,10 @@ export class WeatherNextDaysComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    const date =  new Date(this.day['dt'] * 1000);
+    const dateoptions = {weekday: 'long', day: 'numeric'};
+
+    this.date = date.toLocaleDateString('fr-FR',dateoptions);
     this.temperature = this.day.temp.day;
     this.temperatureMin = this.day.temp.min;
     this.temperatureMax = this.day.temp.max;
@@ -31,7 +36,5 @@ export class WeatherNextDaysComponent implements OnInit {
     this.windSpeed = this.day.wind_speed;
     this.windAngle = this.day.wind_deg;
   }
-
-
 
 }

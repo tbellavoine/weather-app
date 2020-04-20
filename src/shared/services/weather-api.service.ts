@@ -27,6 +27,8 @@ export class WeatherApiService {
   errorCityName:string;
   advice:string;
   background:string;
+  isPlaying:boolean = true;
+  isSound:boolean = true;
 
   constructor(private httpClient:HttpClient) { 
     this.getUserLocation().then(pos=>{
@@ -53,7 +55,8 @@ export class WeatherApiService {
           resolve({lng: resp.coords.longitude, lat: resp.coords.latitude});
         },
         err => {
-          reject(err);
+          resolve({lng: 2.333333, lat: 48.866667})
+          this.cityName = "Paris";
         });
     });
   }

@@ -9,7 +9,6 @@ import { FormGroup, FormBuilder }  from '@angular/forms';
 })
 export class WeatherComponent implements OnInit {
 
-  @ViewChild('video') video: ElementRef;
   cityForm:FormGroup; 
   isOpen:boolean = false;
   isPlaying:boolean = true;
@@ -40,11 +39,11 @@ export class WeatherComponent implements OnInit {
   }
 
   playVideo(){
-    const promise = this.video.nativeElement.play();
+    const promise = document.querySelector('video').play();
 
     if (promise !== undefined) {
       promise.then(_ => {
-        this.video.nativeElement.play();
+        document.querySelector('video').play();
         this.isPlaying = true;
       }).catch(error => {
         this.isPlaying = false;
@@ -53,19 +52,18 @@ export class WeatherComponent implements OnInit {
   }
 
   muteVideo(){
-    console.log("mute",this.isSound);
     if(this.isSound){
-      this.video.nativeElement.muted = true;
+      document.querySelector('video').muted = true;
       this.isSound = false;
     }else{
-      this.video.nativeElement.muted = false;
+      document.querySelector('video').muted = false;
       this.isSound = true;
     }
   }
 
   pauseVideo(){
-    this.video.nativeElement.pause();
+    document.querySelector('video').pause();
     this.isPlaying = false;
   }
- 
+
 }

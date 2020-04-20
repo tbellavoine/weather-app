@@ -1,8 +1,6 @@
 <main>
   <div class="weather-background">
-    <video *ngIf="weatherApiService.background" autoplay="true" muted="muted" loop #video>
-      <source src="assets/videos/{{weatherApiService.background}}" type="video/mp4">
-    </video>
+    <app-weather-videos></app-weather-videos>
   </div>
   <section id="weather-content">
     <header>

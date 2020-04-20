@@ -9,6 +9,7 @@ import { WeatherComponent } from './weather/weather.component';
 import { WeatherNextDaysComponent } from './weather/weather-next-days/weather-next-days.component';
 import { WeatherHourComponent } from './weather/weather-hour/weather-hour.component';
 import { WeatherInformationsComponent } from './weather/weather-informations/weather-informations.component';
+import { WeatherVideosComponent } from './weather/weather-videos/weather-videos.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { WeatherInformationsComponent } from './weather/weather-informations/wea
     WeatherComponent,
     WeatherNextDaysComponent,
     WeatherHourComponent,
-    WeatherInformationsComponent
+    WeatherInformationsComponent,
+    WeatherVideosComponent
   ],
   imports: [
     BrowserModule,

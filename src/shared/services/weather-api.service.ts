@@ -31,11 +31,7 @@ export class WeatherApiService {
   isSound:boolean = true;
 
   constructor(private httpClient:HttpClient) { 
-    this.getUserLocation().then(pos=>{
-      const lat = pos.lat;
-      const lng = pos.lng;
-      this.getWeatherByCoords(lat,lng);
-    })
+    
   }
 
   getCoordWeatherInformations(lat:number,lon:number){
@@ -56,6 +52,7 @@ export class WeatherApiService {
         },
         err => {
           resolve({lng: 2.333333, lat: 48.866667})
+          console.warn(`ERREUR (${err.code}): ${err.message}`);
           this.cityName = "Paris";
         });
     });
@@ -106,7 +103,11 @@ export class WeatherApiService {
       this.daily = datas['daily'];
       this.hourly = datas['hourly'];
       this.getAdviceAndBackground(this.weatherIcon);
-    })
+    },
+    () => {
+      this.errorCityName = "La ville entrée n'existe pas";
+      this.cityName = this.savedCityName;
+    });
   }
 
   getAdviceAndBackground(icon:string){

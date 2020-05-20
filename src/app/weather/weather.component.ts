@@ -20,15 +20,24 @@ export class WeatherComponent implements OnInit {
     });
   }
 
-  ngOnInit(){}
+  ngOnInit(){
+    this.init();
+  }
 
   ngAfterViewInit(){
     
     setTimeout(() => {
       this.playVideo();
-    }, 500);
+    }, 1000);
   }
 
+  init(){
+    this.weatherApiService.getUserLocation().then(pos=>{
+      const lat = pos.lat;
+      const lng = pos.lng;
+      this.weatherApiService.getWeatherByCoords(lat,lng);
+    })
+  }
   onSubmit() {
     this.weatherApiService.cityName = this.cityForm.value.name;
     this.weatherApiService.getWeatherByName(this.weatherApiService.cityName);
@@ -64,6 +73,10 @@ export class WeatherComponent implements OnInit {
   pauseVideo(){
     document.querySelector('video').pause();
     this.isPlaying = false;
+  }
+
+  refresh(){
+    this.init();
   }
 
 }
